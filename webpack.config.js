@@ -29,10 +29,10 @@ module.exports = {
             {
                 // 讓 webpack 讀 .css 的副檔名
                 test: /\.css$/,
-                // use loader 順序由後面執行到前面，所以先使用 css-loader 在執行 style-loader
+                // use loader 順序由後面執行到前面，所以先使用 postcss-loader 加上 prefix 再 css-loader 再執行 style-loader
                 // style-loader : 把 CSS 注入到 JS
                 // https://github.com/webpack-contrib/css-loader
-                 use: ['style-loader', 'css-loader']
+                 use: ['style-loader', 'css-loader','postcss-loader']
             }
         ]
     }
