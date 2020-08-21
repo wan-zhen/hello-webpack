@@ -6,6 +6,11 @@ console.log('dirname:', __dirname)
 console.log(path.resolve(__dirname, "./src"));
 // windows install cross-env get NODE_ENV，並進一步取得 npm script 設定的值
 console.log(process.env.NODE_ENV)
+// 引入 extract-text-webpack-plugin
+// https://github.com/webpack-contrib/extract-text-webpack-plugin
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+// css/[name].css 資料夾路徑
+var extractCSS = new ExtractTextPlugin('css/[name].css')
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
     mode: process.env.NODE_ENV,
@@ -29,9 +34,15 @@ module.exports = {
                 // 讓 webpack 讀 .css 的副檔名
                 test: /\.css$/,
                 // use loader 順序由後面執行到前面，所以先使用 css-loader 在執行 style-loader
+                // style-loader : 把 CSS 注入到 JS
                 // https://github.com/webpack-contrib/css-loader
-                use: ['style-loader', 'css-loader']
+                // use: extractCSS.extract(['style-loader', 'css-loader'])
+                use: extractCSS.extract(['css-loader'])
             }
         ]
-    }
+    },
+    // 使用 extractCSS 把 CSS 拉出來獨力一隻檔案 ，不要放在 JS 裡
+    plugins: [
+        extractCSS
+    ]
 }
