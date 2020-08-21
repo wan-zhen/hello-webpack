@@ -6,14 +6,14 @@ console.log('dirname:', __dirname)
 console.log(path.resolve(__dirname, "./src"));
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
-    mode: 'development',
+    // mode: 'development',
     // 指定資料夾
     context: path.resolve(__dirname, "./src"),
     // 進入點
     entry: './index.js',
     output: {
         // 更改輸出 index-bundle.js 的路徑，預設為 dist
-        path: path.resolve(__dirname, "./dist-test"),
+        // path: path.resolve(__dirname, "./dist-test"),
         filename: 'index-bundle.js'
     }
 }
