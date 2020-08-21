@@ -13,8 +13,8 @@ module.exports = {
     context: path.resolve(__dirname, "./src"),
     // 進入點
     entry: {
-        index: './index.js',
-        about: './about.js',
+        index: './js/index.js',
+        about: './js/about.js',
     },
     output: {
         // 更改輸出 index-bundle.js 的路徑，預設為 dist
@@ -22,5 +22,16 @@ module.exports = {
 
         // [name] 依照 entry 設定的 key 動態對應 output 的 filename
         filename: '[name].js'
+    },
+    module: {
+        rules: [
+            {
+                // 讓 webpack 讀 .css 的副檔名
+                test: /\.css$/,
+                // use loader 順序由後面執行到前面，所以先使用 css-loader 在執行 style-loader
+                // https://github.com/webpack-contrib/css-loader
+                use: ['style-loader', 'css-loader']
+            }
+        ]
     }
 }
