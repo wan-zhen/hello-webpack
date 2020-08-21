@@ -44,6 +44,15 @@ module.exports = {
                         name: '[path][name].[ext]'
                     }
                 }]
+            }, {
+                test: /\.(sass|scss)$/,
+                // 編譯順序 sass -> postcss -> css -> style
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ]
             }
         ]
     }
