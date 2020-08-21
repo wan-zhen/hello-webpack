@@ -32,7 +32,18 @@ module.exports = {
                 // use loader 順序由後面執行到前面，所以先使用 postcss-loader 加上 prefix 再 css-loader 再執行 style-loader
                 // style-loader : 把 CSS 注入到 JS
                 // https://github.com/webpack-contrib/css-loader
-                 use: ['style-loader', 'css-loader','postcss-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader']
+            },
+            {
+                // 透過 file-loader 把 html 副檔名的搬到 dist，所有檔案都可以透過 file-loader 搬移
+                test: /\.html$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        // [path] 路徑，[name] 檔名，[ext] 副檔名 自動判別 html 位子
+                        name: '[path][name].[ext]'
+                    }
+                }]
             }
         ]
     }
