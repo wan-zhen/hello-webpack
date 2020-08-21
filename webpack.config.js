@@ -24,6 +24,24 @@ module.exports = {
         // [name] 依照 entry 設定的 key 動態對應 output 的 filename
         filename: './js/[name].js'
     },
+    devServer: {
+        compress: true,
+        port: 3000,
+        stats: {
+            assets: true,
+            cached: false,
+            chunkModules: false,
+            chunkOrigins: false,
+            chunks: false,
+            colors: true,
+            hash: false,
+            modules: false,
+            reasons: false,
+            source: false,
+            version: false,
+            warnings: false
+        },
+    },
     module: {
         rules: [
             {
