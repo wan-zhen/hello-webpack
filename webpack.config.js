@@ -8,14 +8,19 @@ console.log(path.resolve(__dirname, "./src"));
 console.log(process.env.NODE_ENV)
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
-     mode: process.env.NODE_ENV,
+    mode: process.env.NODE_ENV,
     // 指定資料夾
     context: path.resolve(__dirname, "./src"),
     // 進入點
-    entry: './index.js',
+    entry: {
+        index: './index.js',
+        about: './about.js',
+    },
     output: {
         // 更改輸出 index-bundle.js 的路徑，預設為 dist
         // path: path.resolve(__dirname, "./dist-test"),
-        filename: 'index-bundle.js'
+
+        // [name] 依照 entry 設定的 key 動態對應 output 的 filename
+        filename: '[name].js'
     }
 }
