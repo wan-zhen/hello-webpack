@@ -10,6 +10,8 @@ module.exports = {
     // 進入點
     entry: './index.js',
     output: {
+        // 更改輸出 index-bundle.js 的路徑，預設為 dist
+        path: path.resolve(__dirname, "./dist-test"),
         filename: 'index-bundle.js'
     }
 }
