@@ -31,3 +31,16 @@ console.log(test3);
 // 可以直接使用
 test3('zhenzhen');
 /* ---------------------------------------------- */
+class Main {
+    constructor() {
+        this.name = 'zhenClass';
+        // document.querySelector('#link').addEventListener('click', this.logState)
+        document.querySelector('#link').addEventListener('click', this.logState.bind(this))
+        this.logState();
+    }
+
+    logState() {
+        console.log(this.name);
+    }
+}
+new Main();
