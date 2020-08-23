@@ -1,3 +1,4 @@
+// nodejs 本身未支援 ES6 的語法，所以在寫 webpack 設定檔需要引入模組 要使用 require，不能用 import 的方式
 // 把相對路徑組成絕對路徑
 var path = require('path');
 // dirname 當前的絕對路徑
