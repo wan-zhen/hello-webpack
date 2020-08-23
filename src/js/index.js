@@ -44,3 +44,20 @@ class Main {
     }
 }
 new Main();
+/* ---------------------------------------------- */
+// 有些語法 ie 或手機瀏覽器不支援，安裝 polyfill 來解決
+// 用 async await 舉例 有沒有用 polyfill 的差別
+// 沒有 import 會因為瀏覽器不支援而壞掉
+import '@babel/polyfill';
+async function f() {
+
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("done!"), 1000)
+    });
+
+    let result = await promise; // wait until the promise resolves (*)
+
+    console.log(result); // "done!"
+}
+
+f();
