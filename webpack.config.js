@@ -62,7 +62,8 @@ module.exports = {
                         name: '[path][name].[ext]'
                     }
                 }]
-            }, {
+            },
+            {
                 test: /\.(sass|scss)$/,
                 // 編譯順序 sass -> postcss -> css -> style
                 use: [
@@ -71,6 +72,11 @@ module.exports = {
                     'postcss-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                // 使用 bable 編譯 js
+                test: /\.js$/,
+                use: 'babel-loader'
             }
         ]
     }

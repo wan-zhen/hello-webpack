@@ -1,0 +1,9 @@
+// webpack 讀取設定檔時
+// 有用 babel-loader 會來讀取此檔案
+// 會來調用 @babel/preset-env 編譯器 編譯 js
+// 避免舊的瀏覽器沒有支援語法時失效
+// 通通轉換成 ES5
+// https://babeljs.io/docs/en/babel-preset-env
+{
+    "presets": ["@babel/preset-env"]
+}
