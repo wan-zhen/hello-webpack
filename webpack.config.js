@@ -25,6 +25,16 @@ module.exports = {
         // [name] 依照 entry 設定的 key 動態對應 output 的 filename
         filename: './js/[name].js'
     },
+    resolve: {
+        // 放要省略路徑的設定，引用的地方可以不用把完整的相對路徑打出來
+        modules: [
+            path.resolve('src'),
+            path.resolve('src/js'),
+            path.resolve('src/css'),
+            path.resolve('src/scss'),
+            path.resolve('node_modules'),
+        ],
+    },
     devServer: {
         compress: true,
         port: 3000,
