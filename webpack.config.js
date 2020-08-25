@@ -10,6 +10,7 @@ console.log(process.env.NODE_ENV)
 
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
+var webpack = require('webpack');
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
     mode: process.env.NODE_ENV,
@@ -149,6 +150,14 @@ module.exports = {
     plugins: [
         // 設定起始從 src 資料夾底下的 assets 複製到 dist 底下的 assets 資料夾
         // 原封不動將檔案做搬移 ex : mp3 、zip、font 檔
-        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: 'assets' }] })
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: 'assets' }] }),
+        // 全局注入 jquery ，只要看到 $、jQuery、window.jQuery 都會當 jquery 使用，
+        // 不用在要用到 jquery 的時候 在每一支檔案引入一次
+        // 這種全局注入非必要不要使用
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+        })
     ]
 }

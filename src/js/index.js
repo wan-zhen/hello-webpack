@@ -61,3 +61,5 @@ async function f() {
 }
 
 f();
+
+console.log($('#box'))
