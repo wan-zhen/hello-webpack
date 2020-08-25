@@ -9,11 +9,11 @@ let testArr = [1, 2, 3];
 testArr.map((obj) => console.log(obj));
 /* ---------------------------------------------- */
 /** ES5 引入模組方式 */
-var test = require('testModule.js');
+var test = require('testModule');
 // will get {name: "zhen"}
 console.log(test)
 
-var test1 = require('testModule1.js');
+var test1 = require('testModule1');
 // will console function
 console.log(test1);
 // 可以直接使用

@@ -34,6 +34,9 @@ module.exports = {
             path.resolve('src/scss'),
             path.resolve('node_modules'),
         ],
+        // 引入時可以不用把 js 的副檔名打出來，也可以設定其他副檔名，但不建議設定太多
+        // 因為 main.js 、main.html 會不知道到底要引入哪支檔案
+         extensions: ['.js']
     },
     devServer: {
         compress: true,
