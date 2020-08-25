@@ -31,3 +31,7 @@
 ## image-webpack-loader
 
 壓縮 deploy 出來的圖片大小
+
+## copy-webpack-plugin
+
+搬移檔案

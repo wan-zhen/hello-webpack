@@ -8,6 +8,8 @@ console.log(path.resolve(__dirname, "./src"));
 // windows install cross-env get NODE_ENV，並進一步取得 npm script 設定的值
 console.log(process.env.NODE_ENV)
 
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
     mode: process.env.NODE_ENV,
@@ -36,6 +38,7 @@ module.exports = {
             path.resolve('src/css'),
             path.resolve('src/scss'),
             path.resolve('src/images'),
+            path.resolve('src/assets'),
             path.resolve('node_modules'),
         ],
         // 引入時可以不用把 js 的副檔名打出來，也可以設定其他副檔名，但不建議設定太多
@@ -132,7 +135,20 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                // 想要讓引入其他副檔名，就要使用 file-loader 讓 webpack 認識
+                test: /\.(woff|woff2|ttf|eot)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]?[hash:8]'
+                }
             }
         ]
-    }
+    },
+    plugins: [
+        // 設定起始從 src 資料夾底下的 assets 複製到 dist 底下的 assets 資料夾
+        // 原封不動將檔案做搬移 ex : mp3 、zip、font 檔
+        new CopyWebpackPlugin({ patterns: [{ from: 'assets', to: 'assets' }] })
+    ]
 }
