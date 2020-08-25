@@ -23,3 +23,11 @@
 ## babel-loader
 
 ## polyfill
+
+## url-loader
+
+將小圖轉成 base64
+
+## image-webpack-loader
+
+壓縮 deploy 出來的圖片大小
