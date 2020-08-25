@@ -7,7 +7,8 @@
     "watch": "cross-env NODE_ENV=development webpack --watch",
     "start": "cross-env NODE_ENV=development webpack",
     "deploy": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "dev-host": "cross-env NODE_ENV=development webpack-dev-server --host 192.168.8.8"
   },
   "author": "",
   "license": "ISC",
