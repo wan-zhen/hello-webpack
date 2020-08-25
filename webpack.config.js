@@ -112,7 +112,11 @@ module.exports = {
                     'css-loader',
                     'postcss-loader',
                     'sass-loader'
-                ]
+                ],
+                // 設定 webpack 在找尋檔案的時候 直接從哪個資料夾開始找，且排除 node_modules
+                // 加快打包的速度 ， 所以每個 test 都可以加上這些細部的設定
+                include: path.resolve('src/scss'),
+                exclude: path.resolve('./node_modules'),
             },
             {
                 // 使用 bable 編譯 js
