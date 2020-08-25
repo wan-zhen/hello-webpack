@@ -97,17 +97,41 @@ module.exports = {
                 use: 'babel-loader'
             },
             {
-                // 用 url-loader 把圖片轉成 base64
                 test: /\.(jpe?g|png|gif)$/,
-                use: [{
-                    loader: 'url-loader',
-                    options: {
-                        // 小於 8192kb 的都轉成 base 64，直接存在引入的路徑裡，不會把圖片 deploy 出來
-                        limit: 8192,
-                        // 所有圖片檔案路徑為 路徑/檔名.副檔名?快取亂數
-                        name: '[path][name].[ext]?[hash:8]'
+                // loader 順序由下往上，先壓縮圖片再進行轉成 base64
+                use: [
+                    // 用 url-loader 把圖片轉成 base64
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            // 小於 8192kb 的都轉成 base 64，直接存在引入的路徑裡，不會把圖片 deploy 出來
+                            limit: 8192,
+                            // 所有圖片檔案路徑為 路徑/檔名.副檔名?快取亂數
+                            name: '[path][name].[ext]?[hash:8]'
+                        }
+                    },
+                    // image-webpack-loader 壓縮圖片
+                    {
+                        // 原本 image 底下的 cat2.jpg 29.5KB，deploy 完 dist 出來的大小變 9.2KB
+                        loader: 'image-webpack-loader',
+                        options: {
+                            mozjpeg: {
+                                progressive: true,
+                                quality: 65
+                            },
+                            optipng: {
+                                enabled: false,
+                            },
+                            pngquant: {
+                                quality: '65-90',
+                                speed: 4
+                            },
+                            gifsicle: {
+                                interlaced: false,
+                            }
+                        }
                     }
-                }]
+                ]
             }
         ]
     }
