@@ -15,8 +15,11 @@ module.exports = {
     context: path.resolve(__dirname, "./src"),
     // 進入點
     entry: {
-        index: './js/index.js',
-        about: './js/about.js',
+        // index: './js/index.js',
+        // about: './js/about.js',
+        // 因下面有設定 resolve 省略路徑還有 js 副檔名，所以可以簡化上面的寫法
+        index:'index',
+        about:'about'
     },
     output: {
         // 更改輸出 index-bundle.js 的路徑，預設為 dist
