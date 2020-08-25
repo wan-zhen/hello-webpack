@@ -49,6 +49,21 @@ module.exports = {
         // 因為 main.js 、main.html 會不知道到底要引入哪支檔案
         extensions: ['.js']
     },
+    // optimization 做 webpack 檔案優化 https://webpack.js.org/configuration/optimization/
+    optimization: {
+        splitChunks: {
+            // 提取 node_modules 的內容打包成一支 vendor.js
+            // 把原本 node_modules 會包在 entry 的內容裡給拆開
+            cacheGroups: {
+                vendor: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    chunks: 'initial',
+                    enforce: true,
+                }
+            }
+        }
+    },
     devServer: {
         compress: true,
         port: 3000,
@@ -174,7 +189,7 @@ module.exports = {
             viewport: 'width=device-width, initial-scale=1.0',
             // 對應  entries 的設定自動載入
             // ex : 原本 html 要自己引入<script src="index.js">，現在會自動引入
-            chunks: ['index'],
+            chunks: ['vendor', 'index'],
         }),
         // 直接有 /about.html 產生
         new HtmlWebpackPlugin({
@@ -182,7 +197,7 @@ module.exports = {
             filename: 'about.html',
             template: 'html/template.html',
             viewport: 'width=device-width, initial-scale=1.0',
-            chunks: ['about'],
+            chunks: ['vendor', 'about'],
         }),
     ]
 }
