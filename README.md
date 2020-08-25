@@ -35,3 +35,7 @@
 ## copy-webpack-plugin
 
 搬移檔案
+
+## html-webpack-plugin
+
+用模板的方式自動產生多的 html

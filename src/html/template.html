@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="<%= htmlWebpackPlugin.options.viewport%>">
+    <title><%= htmlWebpackPlugin.options.title%></title>
 </head>
 
 <body>
@@ -13,7 +13,6 @@
     <a id="link">link</a>
     <div id="box">不會被轉成 base64，deploy 時直接發布出實體圖片</div>
     <div id="box1">會被轉成 base64 ，存在編譯出來的程式裡</div>
-    <script src="./js/index.js"></script>
 </body>
 
 </html>

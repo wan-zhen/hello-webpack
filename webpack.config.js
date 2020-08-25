@@ -11,6 +11,8 @@ console.log(process.env.NODE_ENV)
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var webpack = require('webpack');
+
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     // set mode 'development'(執行速度較快) or 'production' (default 會優化、壓縮)
     mode: process.env.NODE_ENV,
@@ -29,7 +31,8 @@ module.exports = {
         // path: path.resolve(__dirname, "./dist-test"),
 
         // [name] 依照 entry 設定的 key 動態對應 output 的 filename
-        filename: './js/[name].js'
+        // ?[hash:8] 引入的時候會自動產生快取版本號
+        filename: './js/[name].js?[hash:8]'
     },
     resolve: {
         // 放要省略路徑的設定，引用的地方可以不用把完整的相對路徑打出來
@@ -74,17 +77,18 @@ module.exports = {
                 // https://github.com/webpack-contrib/css-loader
                 use: ['style-loader', 'css-loader', 'postcss-loader']
             },
-            {
-                // 透過 file-loader 把 html 副檔名的搬到 dist，所有檔案都可以透過 file-loader 搬移
-                test: /\.html$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        // [path] 路徑，[name] 檔名，[ext] 副檔名 自動判別 html 位子
-                        name: '[path][name].[ext]'
-                    }
-                }]
-            },
+            // html 已透過 HtmlWebpackPlugin 產生，不用再透過 file-loader 移進來
+            // {
+            //     // 透過 file-loader 把 html 副檔名的搬到 dist，所有檔案都可以透過 file-loader 搬移
+            //     test: /\.html$/,
+            //     use: [{
+            //         loader: 'file-loader',
+            //         options: {
+            //             // [path] 路徑，[name] 檔名，[ext] 副檔名 自動判別 html 位子
+            //             name: '[path][name].[ext]'
+            //         }
+            //     }]
+            // },
             {
                 test: /\.(sass|scss)$/,
                 // 編譯順序 sass -> postcss -> css -> style
@@ -158,6 +162,27 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
-        })
+        }),
+        new HtmlWebpackPlugin({
+            // 設定參數讓模板帶入 title
+            title: 'Webpack前端自動化開發',
+            // 要輸出的名子
+            filename: 'index.html',
+            // 模板從哪裡來
+            template: 'html/template.html',
+            // 設定參數讓模板帶入 
+            viewport: 'width=device-width, initial-scale=1.0',
+            // 對應  entries 的設定自動載入
+            // ex : 原本 html 要自己引入<script src="index.js">，現在會自動引入
+            chunks: ['index'],
+        }),
+        // 直接有 /about.html 產生
+        new HtmlWebpackPlugin({
+            title: 'about前端自動化開發',
+            filename: 'about.html',
+            template: 'html/template.html',
+            viewport: 'width=device-width, initial-scale=1.0',
+            chunks: ['about'],
+        }),
     ]
 }

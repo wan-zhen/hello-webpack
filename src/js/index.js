@@ -2,7 +2,7 @@
 import "index.css";
 import "index.scss";
 // 把 html 也 dist 出來 ，利用 file-loader 把檔案搬到 dist 裡
-import "index.html";
+// import "index.html"; // html 已透過 HtmlWebpackPlugin 產生，不用再 import 進來
 /* ---------------------------------------------- */
 // 新增一些 ES6 的語法 測試 babel
 let testArr = [1, 2, 3];
