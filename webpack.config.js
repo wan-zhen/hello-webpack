@@ -18,8 +18,8 @@ module.exports = {
         // index: './js/index.js',
         // about: './js/about.js',
         // 因下面有設定 resolve 省略路徑還有 js 副檔名，所以可以簡化上面的寫法
-        index:'index',
-        about:'about'
+        index: 'index',
+        about: 'about'
     },
     output: {
         // 更改輸出 index-bundle.js 的路徑，預設為 dist
@@ -35,11 +35,12 @@ module.exports = {
             path.resolve('src/js'),
             path.resolve('src/css'),
             path.resolve('src/scss'),
+            path.resolve('src/images'),
             path.resolve('node_modules'),
         ],
         // 引入時可以不用把 js 的副檔名打出來，也可以設定其他副檔名，但不建議設定太多
         // 因為 main.js 、main.html 會不知道到底要引入哪支檔案
-         extensions: ['.js']
+        extensions: ['.js']
     },
     devServer: {
         compress: true,
@@ -94,6 +95,19 @@ module.exports = {
                 // 使用 bable 編譯 js
                 test: /\.js$/,
                 use: 'babel-loader'
+            },
+            {
+                // 用 url-loader 把圖片轉成 base64
+                test: /\.(jpe?g|png|gif)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        // 小於 8192kb 的都轉成 base 64，直接存在引入的路徑裡，不會把圖片 deploy 出來
+                        limit: 8192,
+                        // 所有圖片檔案路徑為 路徑/檔名.副檔名?快取亂數
+                        name: '[path][name].[ext]?[hash:8]'
+                    }
+                }]
             }
         ]
     }
